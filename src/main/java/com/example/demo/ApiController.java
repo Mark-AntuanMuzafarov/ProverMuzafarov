@@ -72,5 +72,28 @@ public class ApiController {
         return ResponseEntity.noContent().build();
     }
 
+
+
+    @GetMapping("/post/search/{text}")
+    public ResponseEntity<List<Post>> searchingtext(@PathVariable("text") String text){
+        List<Post> messages2 = new ArrayList<>();
+        for (int i = 0; i < messages.size(); i++) {
+            if(messages.get(i).getTitle().contains(text)){
+                messages2.add(messages.get(i));
+            }
+        }
+        return ResponseEntity.ok(messages2);
+    }
+    @GetMapping("/post/lastest")
+    public ResponseEntity<List<Post>> lastestingtext(){
+        List<Post> messages2 = new ArrayList<>();
+        for (int i = 0; i < Math.min(messages.size(), 20); i++) {
+            messages2.add(messages.get(i));
+        }
+        return ResponseEntity.ok(messages2);
+    }
+
+
+
 }
 
