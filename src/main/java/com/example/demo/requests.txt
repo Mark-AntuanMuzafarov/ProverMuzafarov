@@ -1,0 +1,17 @@
+POST /posts → создать новое объявление
+    curl http://localhost:8080/posts -X POST -d "{\"id\": 123, \"title\": "Voina i Mir", \"price\": 300, \"author\": \"Tolstoy\",
+    \"message\": \"Hi\"}"
+GET /posts → список всех объявлений (по умолчанию новые сверху)
+    curl http://localhost:8080/posts
+GET /posts/{id} → получить одно объявление по id
+    curl http://localhost:8080/posts/0
+PUT /posts/{id} → обновить объявление по id
+    curl http://localhost:8080/posts/123 -X PUT
+DELETE /posts/{id} → удалить объявление
+    curl http://localhost:8080/posts/123 -X DELETE
+DELETE /posts → удалить все объявления сразу
+    curl http://localhost:8080/posts -X DELETE
+GET /posts/count → вернуть количество объявлений (просто число или {"count": 42})
+    curl http://localhost:8080/posts/count
+GET /posts/author/{author} → все объявления конкретного автора
+    curl http://localhost:8080/posts/author/Dostoevskiy

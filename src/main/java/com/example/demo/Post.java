@@ -11,18 +11,24 @@ public class Post {
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
-    public Post(long id, String title, int price, String author, String message, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Post(long id, String title, int price, String author, String message) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.author = author;
         this.message = message;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {

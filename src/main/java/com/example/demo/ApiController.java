@@ -13,12 +13,22 @@ public class ApiController {
     private final List<Post> messages = new ArrayList<>();
     @PostMapping("/posts")
     public ResponseEntity<Void> addPost(@RequestBody Post text) {
+        text.setId(messages.size() - 1);
         messages.add(text);
         return ResponseEntity.accepted().build();
     }
     @GetMapping("/posts")
     public ResponseEntity<List<Post>> getMessages() {
         return ResponseEntity.ok(messages);
+    }
+    @GetMapping("posts/{id}")
+    public ResponseEntity<Void> Remake(@PathVariable("id") Integer index, @RequestBody String title) {
+        for (int i = 0; i < messages.size(); i++) {
+            if(messages.get(i).getId() == index){
+                messages.get(i).setTitle(title);
+            }
+        }
+        return ResponseEntity.noContent().build();
     }
     @GetMapping("posts/{id}")
     public ResponseEntity<Post> getMessage(@PathVariable("id") Integer index) {
@@ -29,7 +39,7 @@ public class ApiController {
         }
         return ResponseEntity.noContent().build();
     }
-    //curl http://localhost:8080/messages/0
+
     @GetMapping("posts/count")
     public ResponseEntity<Integer> getMessage() {
         return ResponseEntity.ok(messages.size());
@@ -49,7 +59,6 @@ public class ApiController {
         messages.remove((int) index);
         return ResponseEntity.noContent().build();
     }
-    //curl http://localhost:8080/messages/0 -X DELETE
     @PutMapping("posts/{id}")
     public ResponseEntity<Void> updateMessage(@PathVariable("id") Integer id, @RequestBody String message) {
 
